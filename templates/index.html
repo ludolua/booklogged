@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Book Catalog</h1>
+    <form method="POST">
+        <input type="text" name="search" placeholder="Search for books...">
+        <button type="submit">Search</button>
+    </form>
+    {% if books %}
+        <ul>
+            {% for book in books %}
+                <li>
+                    <form method="POST" action="{{ url_for('add_book') }}">
+                        <h3>{{ book['volumeInfo']['title'] }}</h3>
+                        <p>{{ book['volumeInfo'].get('authors', 'Unknown') }}</p>
+                        <p>{{ book['volumeInfo'].get('description', 'No description available') }}</p>
+                        <input type="hidden" name="title" value="{{ book['volumeInfo']['title'] }}">
+                        <input type="hidden" name="authors" value="{{ book['volumeInfo'].get('authors', 'Unknown') }}">
+                        <input type="hidden" name="description" value="{{ book['volumeInfo'].get('description', 'No description available') }}">
+                        <button type="submit">Add to Catalog</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
