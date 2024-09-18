@@ -1,4 +1,4 @@
-# Booklogged 📚
+# booklogged 📚
 
 A simple web application to catalog, rate and manage books using the Google Books API.
 
